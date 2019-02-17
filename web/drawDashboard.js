@@ -15,7 +15,7 @@ var port = ":8086";
 
 
 
-function getHotAPData(){
+function getInnerHotIP(){
     var res;
     $.ajax({
         url:host+port+"/hbase/test/getInnerHotIP",
@@ -36,7 +36,7 @@ function getHotAPData(){
 setInnerHotIP();
 function setInnerHotIP() {
 
-    var data = getHotAPData();
+    var data = getInnerHotIP();
     // alert(data);
 
     //  var data = [
@@ -172,32 +172,53 @@ function setInnerHotIP() {
 }
 
 
+
+function getHotAPData(){
+    var res;
+    $.ajax({
+        url:host+port+"/hbase/test/getHotAP",
+        type:"get",
+        async:false,
+//        dataType:"json",
+        success:function (data) {
+            // alert(data);
+            // console.log(11111);
+            res = data;
+        }
+    });
+    return res;
+}
+
+
 // 绘制热点AP的饼图
 setHotAP();
 function setHotAP() {
 
-    var data = [
-        {"ap":'hsd-wd11-323', 'pk_num': 881, 'pk_size': 179720444},
-        {"ap":'hsd-ed02-632', 'pk_num': 432, 'pk_size': 131007617},
-        {"ap":'hsd-ed01-424', 'pk_num': 253, 'pk_size': 129550073},
-        {"ap":'hsd-ed02-321', 'pk_num': 214, 'pk_size': 129008834},
-        {"ap":'hsd-xld04-634', 'pk_num': 172, 'pk_size': 117940386},
-        {"ap":'hsd-ed01-314', 'pk_num': 178, 'pk_size': 114208055},
-        {"ap":'hsd-ed02-314', 'pk_num': 129, 'pk_size': 109072890},
-        {"ap":'hsd-wd05-313', 'pk_num': 122, 'pk_size': 107395729},
-        {"ap":'hsd-wd01-401', 'pk_num': 121, 'pk_size': 96803927},
-        {"ap":'hsd-xld01-636', 'pk_num': 109, 'pk_size': 91306367},
-        {"ap":'hsd-wd05-119', 'pk_num': 109, 'pk_size': 90505867},
-        {"ap":'hsd-xld01-525', 'pk_num': 109, 'pk_size': 90327463},
-        {"ap":'hsd-wd11-215', 'pk_num': 109, 'pk_size': 87054201},
-        {"ap":'hsd-ed01-313', 'pk_num': 109, 'pk_size': 86679579},
-        {"ap":'hsd-xld01-530', 'pk_num': 109, 'pk_size': 79207423},
-        {"ap":'hsd-ed08-512', 'pk_num': 109, 'pk_size': 77332595},
-        {"ap":'hsd-xld08-207', 'pk_num': 109, 'pk_size': 73653717},
-        {"ap":'hsd-ed02-101', 'pk_num': 109, 'pk_size': 71664292},
-        {"ap":'hsd-wd05-106', 'pk_num': 109, 'pk_size': 71551725},
-        {"ap":'hsd-ed02-119', 'pk_num': 109, 'pk_size': 69707430},
-    ];
+
+    var data = getHotAPData();
+
+    // var data = [
+    //     {"ap":'hsd-wd11-323', 'pk_num': 881, 'pk_size': 179720444},
+    //     {"ap":'hsd-ed02-632', 'pk_num': 432, 'pk_size': 131007617},
+    //     {"ap":'hsd-ed01-424', 'pk_num': 253, 'pk_size': 129550073},
+    //     {"ap":'hsd-ed02-321', 'pk_num': 214, 'pk_size': 129008834},
+    //     {"ap":'hsd-xld04-634', 'pk_num': 172, 'pk_size': 117940386},
+    //     {"ap":'hsd-ed01-314', 'pk_num': 178, 'pk_size': 114208055},
+    //     {"ap":'hsd-ed02-314', 'pk_num': 129, 'pk_size': 109072890},
+    //     {"ap":'hsd-wd05-313', 'pk_num': 122, 'pk_size': 107395729},
+    //     {"ap":'hsd-wd01-401', 'pk_num': 121, 'pk_size': 96803927},
+    //     {"ap":'hsd-xld01-636', 'pk_num': 109, 'pk_size': 91306367},
+    //     {"ap":'hsd-wd05-119', 'pk_num': 109, 'pk_size': 90505867},
+    //     {"ap":'hsd-xld01-525', 'pk_num': 109, 'pk_size': 90327463},
+    //     {"ap":'hsd-wd11-215', 'pk_num': 109, 'pk_size': 87054201},
+    //     {"ap":'hsd-ed01-313', 'pk_num': 109, 'pk_size': 86679579},
+    //     {"ap":'hsd-xld01-530', 'pk_num': 109, 'pk_size': 79207423},
+    //     {"ap":'hsd-ed08-512', 'pk_num': 109, 'pk_size': 77332595},
+    //     {"ap":'hsd-xld08-207', 'pk_num': 109, 'pk_size': 73653717},
+    //     {"ap":'hsd-ed02-101', 'pk_num': 109, 'pk_size': 71664292},
+    //     {"ap":'hsd-wd05-106', 'pk_num': 109, 'pk_size': 71551725},
+    //     {"ap":'hsd-ed02-119', 'pk_num': 109, 'pk_size': 69707430},
+    // ];
 
     var pieChartCanvas = $('#hotAPPieChart').get(0).getContext('2d');
 
