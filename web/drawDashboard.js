@@ -1,5 +1,5 @@
-var host = "http://192.168.2.37";
-var port = "8080";
+var host = "http://192.168.1.146";
+var port = ":8086";
 
 
 // alert(11121);
@@ -15,54 +15,52 @@ var port = "8080";
 
 
 
-// function getHotAPData(){
-//     var res;
-//     $.ajax({
-//         url:"http://192.168.2.37:8080/hbase/getHotAP",
-//         type:"get",
-//         async:false,
-//         success:function (data) {
-//             // alert(data);
-//             res = data;
-//         }
-//     });
-//     return res;
-// }
-
-
+function getHotAPData(){
+    var res;
+    $.ajax({
+        url:host+port+"/hbase/test/getInnerHotIP",
+        type:"get",
+        async:false,
+//        dataType:"json",
+        success:function (data) {
+            // alert(data);
+            // console.log(11111);
+            res = data;
+        }
+    });
+    return res;
+}
 
 // 绘制内部热点IP的饼图
 
 setInnerHotIP();
 function setInnerHotIP() {
 
-    // alert(23333);
-    // var data = getHotAPData();
-    // alert(data[1].ip);
+    var data = getHotAPData();
+    // alert(data);
 
-
-     var data = [
-        {"ip":'10.12.12.23', 'pk_num': 881, 'pk_size': 1802132},
-        {"ip":'10.12.13.5', 'pk_num': 432, 'pk_size': 1552132},
-        {"ip":'10.12.12.15', 'pk_num': 253, 'pk_size': 1452132},
-        {"ip":'10.0.13.9', 'pk_num': 214, 'pk_size': 1302132},
-        {"ip":'10.12.1.24', 'pk_num': 172, 'pk_size': 1220132},
-        {"ip":'10.8.0.5', 'pk_num': 178, 'pk_size': 1152132},
-        {"ip":'10.2.3.5', 'pk_num': 129, 'pk_size': 1052132},
-        {"ip":'10.12.13.155', 'pk_num': 122, 'pk_size': 991132},
-        {"ip":'10.12.13.52', 'pk_num': 121, 'pk_size': 894132},
-        {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 702132},
-        {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 621322},
-        {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 521323},
-        {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 421327},
-        {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 321321},
-        {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 221324},
-        {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 121327},
-        {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 111329},
-        {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 102132},
-        {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 92132},
-        {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 52132},
-    ];
+    //  var data = [
+    //     {"ip":'10.12.12.23', 'pk_num': 881, 'pk_size': 1802132},
+    //     {"ip":'10.12.13.5', 'pk_num': 432, 'pk_size': 1552132},
+    //     {"ip":'10.12.12.15', 'pk_num': 253, 'pk_size': 1452132},
+    //     {"ip":'10.0.13.9', 'pk_num': 214, 'pk_size': 1302132},
+    //     {"ip":'10.12.1.24', 'pk_num': 172, 'pk_size': 1220132},
+    //     {"ip":'10.8.0.5', 'pk_num': 178, 'pk_size': 1152132},
+    //     {"ip":'10.2.3.5', 'pk_num': 129, 'pk_size': 1052132},
+    //     {"ip":'10.12.13.155', 'pk_num': 122, 'pk_size': 991132},
+    //     {"ip":'10.12.13.52', 'pk_num': 121, 'pk_size': 894132},
+    //     {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 702132},
+    //     {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 621322},
+    //     {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 521323},
+    //     {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 421327},
+    //     {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 321321},
+    //     {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 221324},
+    //     {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 121327},
+    //     {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 111329},
+    //     {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 102132},
+    //     {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 92132},
+    //     {"ip":'10.12.1.89', 'pk_num': 109, 'pk_size': 52132},
+    // ];
 
 
 
@@ -163,7 +161,7 @@ function setInnerHotIP() {
     // 进度条
     for(var i=0;i<data.length;i++){
         var progressBar = '<div class="progress-group" style="height: 25px">\n' +
-            '                    <span class="progress-text"><a href="lineChart.html"  opt="timeLine" name="'+data[i].ip+'">'+data[i].ip+'</a></span>\n' +
+            '                    <span class="progress-text"><a href="#"  opt="timeLine" name="'+data[i].ip+'">'+data[i].ip+'</a></span>\n' +
             '                    <span class="progress-number"><b>'+data[i].pk_size+'</b>/'+max_size+'</span>\n' +
             '                    <div class="progress sm" style="height: 5px;">\n' +
             '                      <div class="progress-bar progress-bar-aqua" style="width: '+100*data[i].pk_size/max_size+'%; background-color: '+colors[i]+'"></div>\n' +
@@ -298,7 +296,7 @@ function setHotAP() {
     // 进度条
     for(var i=0;i<data.length;i++){
         var progressBar = '<div class="progress-group" style="height: 25px">\n' +
-            '                    <span class="progress-text"><a href="lineChart.html"  opt="timeLine" name="'+data[i].ap+'">'+data[i].ap+'</a></span>\n' +
+            '                    <span class="progress-text"><a href="#"  opt="timeLine" name="'+data[i].ap+'">'+data[i].ap+'</a></span>\n' +
             '                    <span class="progress-number"><b>'+data[i].pk_size+'</b>/'+max_size+'</span>\n' +
             '                    <div class="progress sm" style="height: 5px;">\n' +
             '                      <div class="progress-bar progress-bar-aqua" style="width: '+100*data[i].pk_size/max_size+'%; background-color: '+colors[i]+'"></div>\n' +
@@ -433,7 +431,7 @@ function setOutterHotIP() {
     // 进度条
     for(var i=0;i<data.length;i++){
         var progressBar = '<div class="progress-group" style="height: 25px">\n' +
-            '                    <span class="progress-text"><a href="lineChart.html" opt="timeLine" name='+data[i].ip+'>'+data[i].ip+'</a></span>\n' +
+            '                    <span class="progress-text"><a href="#" opt="timeLine" name='+data[i].ip+'>'+data[i].ip+'</a></span>\n' +
             '                    <span class="progress-number"><b>'+data[i].pk_size+'</b>/'+max_size+'</span>\n' +
             '                    <div class="progress sm" style="height: 5px;">\n' +
             '                      <div class="progress-bar progress-bar-aqua" style="width: '+100*data[i].pk_size/max_size+'%; background-color: '+colors[i]+'"></div>\n' +
@@ -538,3 +536,5 @@ function setListener() {
         $.cookie("timeLineName", $(this).attr("name"));
     });
 }
+
+// alert($.cookie("timeLineName"));
