@@ -1,6 +1,4 @@
-let host = "http://192.168.1.146";
-let port = ":8086";
-
+let serverAddress = getServerAddress();
 
 $("#title").html($.cookie("timeLineName"));
 $("#titleLine").html($.cookie("timeLineName")+"的流量基于时间的变化曲线");
@@ -58,7 +56,7 @@ $('#btnSearchLog').trigger('click'); //load logs
 function getInnerHotIP(){
     let res = null;
     $.ajax({
-        url:host+port+"/hbase/test/getInnerHotIP",
+        url:serverAddress+"/hbase/test/getInnerHotIP",
         type:"get",
         async:false,
         success:function (data) {

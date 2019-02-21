@@ -1,12 +1,10 @@
-let host = "http://192.168.1.146";
-let port = ":8086";
-
+let serverAddress = getServerAddress();
 
 // 获取内部热点IP
 function getInnerHotIP(){
     let res = null;
     $.ajax({
-        url:host+port+"/hbase/test/getInnerHotIP",
+        url:serverAddress+"/hbase/test/getInnerHotIP",
         type:"get",
         async:false,
         success:function (data) {
@@ -84,7 +82,7 @@ function drawInnerHotIP() {
 function getHotAPData(){
     let res = null;
     $.ajax({
-        url:host+port+"/hbase/test/getHotAP",
+        url:serverAddress+"/hbase/test/getHotAP",
         type:"get",
         async:false,
         success:function (data) {
