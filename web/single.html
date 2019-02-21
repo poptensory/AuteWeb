@@ -21,6 +21,10 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
 
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
+
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -51,9 +55,9 @@
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
+
     </nav>
   </header>
-
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -79,8 +83,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="homepage.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href="single.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+            <li><a href="homepage.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+            <li class="active"><a href="single.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
         </li>
 
@@ -97,8 +101,8 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Aute Dashboard
+      <h1 id="title" >
+        <a href="#">Aute Dashboard</a>
         <!--<small>Version 2.0</small>-->
       </h1>
       <ol class="breadcrumb">
@@ -107,129 +111,105 @@
       </ol>
     </section>
 
-    <!-- Main content -->
+
+    <!--下面两行包括：一行3个饼图显示某个项的信息，一行为该项某天内的流量随时间变化曲线-->
     <section class="content">
 
-      <!--饼图和进度条 分别4列-->
+      <!--饼图-->
+      <div class="row">
 
-          <div class="row">
-
-            <!--内部热点IP-->
-            <div class="col-md-3">
+            <div class="col-md-4">
               <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">内部热点IP</h3>
+                  <h3 class="box-title">访问类型</h3>
                 </div>
                 <div class="box-body">
                   <canvas id="innerHotIPPieChart" style="height:250px"></canvas>
                 </div>
               </div>
-              <div class="box box-success">
-                <div class="box-header with-border">
-                  <h3 class="box-title">内部热点IP</h3>
-                </div>
-                <div class="box-body" id="innerHotIPProgressBar">
-                </div>
-              </div>
             </div>
 
-            <!--热点AP-->
-            <div class="col-md-3">
+            <div class="col-md-4">
               <!-- DONUT CHART -->
               <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">热点AP</h3>
+                  <h3 class="box-title">流量组成结构</h3>
                 </div>
                 <div class="box-body">
                   <canvas id="hotAPPieChart" style="height:250px"></canvas>
                 </div>
               </div>
-              <div class="box box-success">
-                <div class="box-header with-border">
-                  <h3 class="box-title">热点AP</h3>
-                </div>
-                <div class="box-body" id="hotAPProgressBar">
-                </div>
-              </div>
             </div>
 
-            <!--外部热点IP-->
-            <div class="col-md-3">
+            <div class="col-md-4">
               <!-- DONUT CHART -->
               <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">外部热点IP</h3>
+                  <h3 class="box-title">访问设备类型</h3>
                 </div>
                 <div class="box-body">
                   <canvas id="outterHotIPPieChart" style="height:250px"></canvas>
                 </div>
               </div>
-              <div class="box box-success">
-                <div class="box-header with-border">
-                  <h3 class="box-title">外部热点IP</h3>
-                </div>
-                <div class="box-body" id="outterHotIPProgressBar">
-                </div>
-              </div>
-            </div>
-
-            <!--热点域名-->
-            <div class="col-md-3">
-              <div class="box box-success">
-                <div class="box-header with-border">
-                  <h3 class="box-title">热点域名</h3>
-                </div>
-                <div class="box-body">
-                  <canvas id="hotDomainNamePieChart" style="height:250px"></canvas>
-                </div>
-              </div>
-              <div class="box box-success">
-                <div class="box-header with-border">
-                  <h3 class="box-title">热点域名</h3>
-                </div>
-                <div class="box-body" id="hotDomainNameProgressBar">
-                </div>
-              </div>
             </div>
           </div>
 
-      <!--全校流量随时间变化曲线-->
+      <!--单项流量随着时间变化曲线-->
       <div class="row">
         <div class="col-md-12">
           <div class="box box-success">
+
+            <!--头部部分-->
             <div class="box-header with-border">
-              <h3 class="box-title">全校流量</h3>
-
+              <h3 class="box-title">流量随时间变化曲线</h3>
               <div class="box-tools pull-right">
+                  <div class="col-xs-2 pull-right">
+                    <div class="form-group">
+                      <div class="input-group date">
 
-              </div>
+                        <!--日期的logo-->
+                        <div class="input-group-addon">
+                          <i class="fa fa-calendar"></i>
+                        </div>
+
+                        <!--日期输入框-->
+                        <input  type="text" class="form-control pull-right" id="datepicker" >
+
+                        <!--搜索按钮-->
+                        <span class="input-group-btn">
+                          <button id="btnAnalysis"  class="btn btn-primary btn-flat"><i class="fa fa-search"></i> 查看 </button>
+                        </span>
+                      </div>
+                      <!-- /.input group -->
+                    </div>
+                  </div>
             </div>
-            <!-- /.box-header -->
+            </div>
+
+            <!--曲线图部分-->
             <div class="box-body">
               <div class="row">
                 <div class="col-md-12">
-                  <p class="text-center">
-                    <strong style="font-size: larger">全校的流量基于时间的变化曲线</strong>
-                  </p>
 
+                  <!--设置标题-->
+                  <p class="text-center"><strong id="titleLine"></strong></p>
+
+                  <!--绘制曲线图-->
                   <div class="chart">
-                    <canvas id="campusTrafficChart" style="height: 180px;"></canvas>
+                    <canvas id="singleTrafficChart" style="height: 200px;"></canvas>
                   </div>
 
                 </div>
               </div>
-              <!-- /.row -->
             </div>
-            <!-- /.box-footer -->
           </div>
-          <!-- /.box -->
         </div>
-        <!-- /.col -->
       </div>
 
     </section>
+    <!-- /.content -->
   </div>
-
+  <!-- /.content-wrapper -->
 
   <!--脚注-->
   <footer class="main-footer">
@@ -241,9 +221,10 @@
   </footer>
 
 </div>
+<!-- ./wrapper -->
+
 
 <!--####################################################################################################################################################################-->
-
 <!-- jQuery 3 -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -261,17 +242,16 @@
 <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- ChartJS -->
 <script src="bower_components/chart.js/Chart.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard2.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-
+<!--cookie所需库文件-->
 <script src="aute/js/jquery.cookie.js"></script>
-
-
-<!--要用到Chart.js，要在其后面引用.js-->
-<script src="homepage.js"></script>
-
+<!-- bootstrap datepicker -->
+<script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+<!--日历选择中文库文件-->
+<script src="aute/js/bootstrap-datepicker.zh-CN.js" charset="utf-8"> </script>
+<!--本html对应js文件，要用到Chart.js，要在其后面引用.js-->
+<script src="single.js"></script>
 
 </body>
 </html>
